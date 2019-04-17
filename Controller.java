@@ -118,38 +118,39 @@ public class Controller {
 	private JPanel populateControlPanel() {
 		
 		Dimension size = new Dimension(this.frame.getWidth() / 4, this.frame.getHeight() / 8);
+		Dimension maxButtonSize = size; //new Dimension(40, 20);
+		Dimension minButtonSize = size;
+		System.out.println(maxButtonSize);
 		
+		// allow for one row, with three components (button, separator, button)
 		GridLayout layout = new GridLayout(1, 3, 20, 20);
 						
 		JPanel pnl = new JPanel(layout);
-
+				
+		pnl.setSize(size);
+		pnl.setPreferredSize(size);
 		
-		//pnl.setSize(size);
-		//pnl.setPreferredSize(size);
-		
-
-		Dimension maxButtonSize = size; //new Dimension(40, 20);
-		
-		JPanel resetButtonPanel = new JPanel();
+		// trick JAVA GridLayout into not resizing our buttons by wrapping them with a JPanel
+		JPanel resetButtonWrapper = new JPanel();
 		JButton resetButton = new JButton("Reset");
-		resetButton.setMinimumSize(maxButtonSize);
+		resetButton.setMinimumSize(minButtonSize);
 		resetButton.setMaximumSize(maxButtonSize);		
 		resetButton.addActionListener(ae -> resetButtons(ae));
-		resetButtonPanel.add(resetButton);
-		pnl.add(resetButtonPanel);
+		resetButtonWrapper.add(resetButton);
+		pnl.add(resetButtonWrapper);
 		
-		JPanel separatorPanel = new JPanel();
+		JPanel separatorWrapper = new JPanel();
 		JSeparator separator = new JSeparator();
-		separatorPanel.add(separator);
-		pnl.add(separatorPanel);
+		separatorWrapper.add(separator);
+		pnl.add(separatorWrapper);
 
-		JPanel exitButtonPanel = new JPanel();
+		JPanel exitButtonWrapper = new JPanel();
 		JButton exitButton = new JButton("Exit");
-		exitButton.setMinimumSize(maxButtonSize);
+		exitButton.setMinimumSize(minButtonSize);
 		exitButton.setMaximumSize(maxButtonSize);
 		exitButton.addActionListener(ae -> exitProgram(ae));
-		exitButtonPanel.add(exitButton);
-		pnl.add(exitButtonPanel);
+		exitButtonWrapper.add(exitButton);
+		pnl.add(exitButtonWrapper);
 
 		return pnl;
 	}
