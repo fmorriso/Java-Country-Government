@@ -1,4 +1,3 @@
-import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 
@@ -12,12 +11,11 @@ public class CountryButton extends JButton {
         this.name = name;
         this.setText(this.name);
         this.government = government;
-        this.addActionListener((ActionEvent ae) -> clickHandler(ae));        
+        
+        this.addMouseListener(new CountryButtonListener(this));
     }
 
-    private void clickHandler(ActionEvent ae) {
-		System.out.format("%s was clicked%n", this.name);
-	}
+
 
 	@SuppressWarnings("unused")
     private CountryButton(){/* prevent uninitialized instances */}
