@@ -106,51 +106,53 @@ public class Controller {
 		else if (this.numCountries <= 15)
 			numRows = 3;
 
-		GridLayout layout = new GridLayout(numRows, MAX_COLUMNS);
-		layout.setHgap(10);
-		layout.setVgap(10);
-
+		GridLayout layout = new GridLayout(numRows, MAX_COLUMNS, 10, 10);
+		
 		JPanel pnl = new JPanel(layout);
 
 		return pnl;
 	}
 
 	private JPanel populateControlPanel() {
-		
-		Dimension size = new Dimension(this.frame.getWidth() / 4, this.frame.getHeight() / 8);
+		System.out.format("Frame: width=%d, height=%d%n",this.frame.getWidth(),this.frame.getHeight());
+		Dimension size = new Dimension(this.frame.getWidth() / 8, this.frame.getHeight() / 16);
 		Dimension maxButtonSize = size; //new Dimension(40, 20);
 		Dimension minButtonSize = size;
 		System.out.println(maxButtonSize);
 		
 		// allow for one row, with three components (button, separator, button)
 		GridLayout layout = new GridLayout(1, 3, 20, 20);
-						
+		
 		JPanel pnl = new JPanel(layout);
-				
 		pnl.setSize(size);
 		pnl.setPreferredSize(size);
 		
-		// trick JAVA GridLayout into not resizing our buttons by wrapping them with a JPanel
+		// trick JAVA GridLayout into NOT auto-resizing our buttons by wrapping them with a JPanel
 		JPanel resetButtonWrapper = new JPanel();
+		resetButtonWrapper.setSize(maxButtonSize);
+		//resetButtonWrapper.setPreferredSize(maxButtonSize);
 		JButton resetButton = new JButton("Reset");
 		resetButton.setMinimumSize(minButtonSize);
 		resetButton.setMaximumSize(maxButtonSize);		
-		resetButton.addActionListener(ae -> resetButtons(ae));
+		resetButton.addActionListener(ae -> resetButtons(ae, resetButton));
 		resetButtonWrapper.add(resetButton);
 		pnl.add(resetButtonWrapper);
 		
 		JPanel separatorWrapper = new JPanel();
+		separatorWrapper.setSize(maxButtonSize);
+		//separatorWrapper.setPreferredSize(maxButtonSize);
 		JSeparator separator = new JSeparator();
 		separatorWrapper.add(separator);
 		pnl.add(separatorWrapper);
 
 		JPanel exitButtonWrapper = new JPanel();
+		exitButtonWrapper.setSize(maxButtonSize);
 		JButton exitButton = new JButton("Exit");
 		exitButton.setMinimumSize(minButtonSize);
 		exitButton.setMaximumSize(maxButtonSize);
 		exitButton.addActionListener(ae -> exitProgram(ae));
 		exitButtonWrapper.add(exitButton);
-		pnl.add(exitButtonWrapper);
+		pnl.add(exitButtonWrapper);		
 
 		return pnl;
 	}
@@ -160,7 +162,8 @@ public class Controller {
 		System.exit(0);
 	}
 
-	private void resetButtons(ActionEvent ae) {
+	private void resetButtons(ActionEvent ae, JButton button) {
+		System.out.format("button: width=%d, height=%d%n", button.getWidth(), button.getHeight());
 		// System.out.format("Resetting %d buttons%n", this.countries.size());
 		for (CountryButton cb : this.countries) {
 			cb.reset();
