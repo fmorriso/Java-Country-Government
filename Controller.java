@@ -53,7 +53,7 @@ public class Controller {
 	private void populatePanel() {
 		for(int i = 0; i < this.numCountries; i++) {
 			String name = String.format("Test%d", i);
-			CountryButton cb = new CountryButton(name, Government.Capitalist);
+			CountryButton cb = new CountryButton(name, Government.Capitalist, this);
 			mainPanel.add(cb);	
 		}
 		
@@ -107,6 +107,11 @@ public class Controller {
 		} while (keepAsking);
 
 		return count;
+	}
+
+	public void reactToMouseClickedEvent(CountryButton countryButton, MouseButton mouseButton) {
+		System.out.format("Button %s was clicked by the %s mouse button%n", countryButton.getName(), mouseButton);
+		
 	}
 
 }

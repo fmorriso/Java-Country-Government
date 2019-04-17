@@ -4,30 +4,34 @@ import java.awt.event.MouseListener;
 public class CountryButtonListener implements MouseListener {
 
 	private CountryButton countryButton;
+	private Controller controller;
+	
 	private static final int LEFT_MOUSE_BUTTON = 1;
 	private static final int RIGHT_MOUSE_BUTTON = 3;
 
-	public CountryButtonListener(CountryButton countryButton) {
+	public CountryButtonListener(CountryButton countryButton, Controller controller) {
 		this.countryButton = countryButton;
+		this.controller = controller;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int whichButton = e.getButton();
-		System.out.format("%s was clicked by the mouse %d (%s) button%n", countryButton.getName(), whichButton, getMouseButtonName(whichButton));
-
+		// NOTE: do NOT put code here because we prefer mousePressed even in order to
+		// 1. avoid duplicate reactions (pressed first, followed by clicked second)
+		// to left mouse click.
+		// 2. ignore Enter key (this program is designed to be used only with a mouse)
 	}
-
-	private String getMouseButtonName(int buttonNumber) {
+	
+	private MouseButton getMouseButton(int buttonNumber) {
 		switch (buttonNumber) {
 			case 1 :
-				return "left";
+				return MouseButton.Left;
 
 			case 3 :
-				return "right";
+				return MouseButton.Right;
 
 			default :
-				return "unknown";
+				return MouseButton.Unknown;
 		}
 	}
 
@@ -46,8 +50,8 @@ public class CountryButtonListener implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		int whichButton = e.getButton();
-		System.out.format("%s was pressed by the mouse %d (%s) button%n", countryButton.getName(), whichButton, getMouseButtonName(whichButton));
-
+		System.out.format("%s was pressed by the mouse %d (%s) button%n", countryButton.getName(), whichButton, getMouseButton(whichButton));
+		controller.reactToMouseClickedEvent(this.countryButton, getMouseButton(whichButton));
 	}
 
 	@Override
