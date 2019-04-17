@@ -6,9 +6,6 @@ public class CountryButtonListener implements MouseListener {
 	private CountryButton countryButton;
 	private Controller controller;
 	
-	private static final int LEFT_MOUSE_BUTTON = 1;
-	private static final int RIGHT_MOUSE_BUTTON = 3;
-
 	public CountryButtonListener(CountryButton countryButton, Controller controller) {
 		this.countryButton = countryButton;
 		this.controller = controller;
@@ -51,7 +48,7 @@ public class CountryButtonListener implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		int whichButton = e.getButton();
 		System.out.format("%s was pressed by the mouse %d (%s) button%n", countryButton.getName(), whichButton, getMouseButton(whichButton));
-		controller.reactToMouseClickedEvent(this.countryButton, getMouseButton(whichButton));
+		controller.reactToCountryMouseClickEvent(this.countryButton, getMouseButton(whichButton));
 	}
 
 	@Override

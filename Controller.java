@@ -1,23 +1,31 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Controller {
-	
+
 	private JFrame frame;
 	private Dimension frameSize;
 	private JPanel mainPanel;
+	private JPanel controlPanel;
+	private List<CountryButton> countries;
+
 	private static final int MAX_COLUMNS = 5;
-	
+
 	private int numCountries;
-	
+
 	public Controller(Dimension frameSize) {
+
 		this.frameSize = frameSize;
-		
+
 		frame = new JFrame("Country Government Chooser");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -30,44 +38,87 @@ public class Controller {
 		numCountries = getNumberOfCountries();
 		String title = "Country Government chooser";
 		String message;
-		if(numCountries == Integer.MIN_VALUE) {
+		if (numCountries == Integer.MIN_VALUE) {
 			message = "No country count chosen.  Program stopped.";
 			int messageType = JOptionPane.PLAIN_MESSAGE;
 			JOptionPane.showMessageDialog(null, message, title, messageType);
 			return;
 		}
-		
+
+		frame.setLayout(new GridLayout(0, 1));
+
 		mainPanel = createMainPanel();
-		
-		populatePanel();
-		
+
+		populateCountryGridPanel();
+
 		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+
+		controlPanel = populateControlPanel();
+		frame.getContentPane().add(controlPanel, BorderLayout.CENTER);
+
 		frame.pack();
-		
+
 		// put the JFrame in the middle of the physical screen
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 	}
 
-	private void populatePanel() {
-		for(int i = 0; i < this.numCountries; i++) {
-			String name = String.format("Test%d", i);
+	private void populateCountryGridPanel() {
+		this.countries = new ArrayList<CountryButton>();
+		for (int i = 0; i < this.numCountries; i++) {
+			String name = String.format("Test%d", i);			
 			CountryButton cb = new CountryButton(name, Government.Capitalist, this);
-			mainPanel.add(cb);	
+			this.countries.add(cb);
+			mainPanel.add(cb);
 		}
-		
 	}
 
-	private JPanel createMainPanel() {		
+	private JPanel createMainPanel() {
+		
 		int numRows = 4;
-		if(this.numCountries <= 5) numRows = 1;
-		else if(this.numCountries <= 10) numRows = 2;
-		else if(this.numCountries <= 15) numRows = 3;
-		JPanel pnl = new JPanel(new GridLayout(numRows, MAX_COLUMNS));
-		pnl.setSize(frameSize);
-		pnl.setPreferredSize(frameSize);
+		if (this.numCountries <= 5)
+			numRows = 1;
+		else if (this.numCountries <= 10)
+			numRows = 2;
+		else if (this.numCountries <= 15)
+			numRows = 3;
+		
+		GridLayout layout = new GridLayout(numRows, MAX_COLUMNS);
+		layout.setHgap(10);
+		layout.setVgap(10);
+
+		JPanel pnl = new JPanel(layout);
+
 		return pnl;
+	}
+
+	private JPanel populateControlPanel() {
+		JPanel pnl = new JPanel(new GridLayout(1, 0));
+
+		JButton resetButton = new JButton("Reset");
+		resetButton.addActionListener(ae -> resetButtons(ae));
+		pnl.add(resetButton);
+
+		JButton exitButton = new JButton("Exit");
+		exitButton.addActionListener(ae -> exitProgram(ae));
+		pnl.add(exitButton);
+
+		return pnl;
+	}
+
+	private void exitProgram(ActionEvent ae) {
+		JOptionPane.showMessageDialog(null, "stopping program");
+		System.exit(0);
+	}
+
+	private void resetButtons(ActionEvent ae) {
+		System.out.format("Resetting %d buttons%n", this.countries.size());
+		for (CountryButton cb : this.countries) {			
+			cb.reset();
+		}
+		this.mainPanel.paintComponents(this.mainPanel.getGraphics());
+
 	}
 
 	private int getNumberOfCountries() {
@@ -76,28 +127,26 @@ public class Controller {
 		final int min = 5, max = 20;
 		String dialogTitle = String.format("Number of countries");
 		String prompt = String.format("Enter number of countries that is between %d and %d", min, max);
-		final String errorMessageOutsideRange = String
-				.format("Invalid value - outside of allowable range of %d to %d. Try again.", min, max);
+		final String errorMessageOutsideRange = String.format("Invalid value - outside of allowable range of %d to %d. Try again.", min, max);
 		// keep asking for a number until the number is within the valid range.
 
 		boolean keepAsking = true;
 		do {
 			try {
-								
+
 				Object rawResponse = JOptionPane.showInputDialog(null, prompt, dialogTitle, JOptionPane.QUESTION_MESSAGE);
-							
+
 				// check for Cancel button click:
-				if(rawResponse == null) {
+				if (rawResponse == null) {
 					keepAsking = false;
 					count = Integer.MIN_VALUE; // call should check this value as the indicator that Cancel was clicked
 					continue;
 				}
-				
-				count = Integer.parseInt((String)rawResponse);
-				
+
+				count = Integer.parseInt((String) rawResponse);
+
 				if (count < min || count > max) {
-					JOptionPane.showMessageDialog(null, errorMessageOutsideRange, "Range Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, errorMessageOutsideRange, "Range Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					keepAsking = false;
 				}
@@ -109,9 +158,30 @@ public class Controller {
 		return count;
 	}
 
-	public void reactToMouseClickedEvent(CountryButton countryButton, MouseButton mouseButton) {
+	public void reactToCountryMouseClickEvent(CountryButton countryButton, MouseButton mouseButton) {
 		System.out.format("Button %s was clicked by the %s mouse button%n", countryButton.getName(), mouseButton);
-		
+		switch (mouseButton) {
+			case Left :
+				showCountry(countryButton);
+				break;
+
+			case Right :
+				changeGovernment(countryButton);
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	private void changeGovernment(CountryButton countryButton) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void showCountry(CountryButton countryButton) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
