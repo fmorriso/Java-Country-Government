@@ -11,6 +11,7 @@ public class Controller {
 	private JFrame frame;
 	private Dimension frameSize;
 	private JPanel mainPanel;
+	private static final int MAX_COLUMNS = 5;
 	
 	private int numCountries;
 	
@@ -22,9 +23,6 @@ public class Controller {
 
 		frame.setPreferredSize(frameSize);
 		frame.setSize(frameSize);
-		
-		
-		
 
 	}
 
@@ -53,12 +51,20 @@ public class Controller {
 	}
 
 	private void populatePanel() {
-		CountryButton cb = new CountryButton("Test", Government.Capitalist);
-		mainPanel.add(cb);
+		for(int i = 0; i < this.numCountries; i++) {
+			String name = String.format("Test%d", i);
+			CountryButton cb = new CountryButton(name, Government.Capitalist);
+			mainPanel.add(cb);	
+		}
+		
 	}
 
 	private JPanel createMainPanel() {		
-		JPanel pnl = new JPanel(new GridLayout(0, numCountries / 5));
+		int numRows = 4;
+		if(this.numCountries <= 5) numRows = 1;
+		else if(this.numCountries <= 10) numRows = 2;
+		else if(this.numCountries <= 15) numRows = 3;
+		JPanel pnl = new JPanel(new GridLayout(numRows, MAX_COLUMNS));
 		pnl.setSize(frameSize);
 		pnl.setPreferredSize(frameSize);
 		return pnl;
