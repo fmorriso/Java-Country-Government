@@ -1,19 +1,67 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class Controller {
+	
+	private JFrame frame;
+	private Dimension frameSize;
+	private JPanel mainPanel;
+	
 	private int numCountries;
+	
+	public Controller(Dimension frameSize) {
+		this.frameSize = frameSize;
+		
+		frame = new JFrame("Country Government Chooser");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frame.setPreferredSize(frameSize);
+		frame.setSize(frameSize);
+		
+		
+		
+
+	}
 
 	public void start() {
 		numCountries = getNumberOfCountries();
 		String title = "Country Government chooser";
 		String message;
 		if(numCountries == Integer.MIN_VALUE) {
-			message = "No country count chosen.  Game stopped.";
+			message = "No country count chosen.  Program stopped.";
 			int messageType = JOptionPane.PLAIN_MESSAGE;
 			JOptionPane.showMessageDialog(null, message, title, messageType);
 			return;
 		}
+		
+		mainPanel = createMainPanel();
+		
+		populatePanel();
+		
+		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		frame.pack();
+		
+		// put the JFrame in the middle of the physical screen
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
+	}
+
+	private void populatePanel() {
+		CountryButton cb = new CountryButton("Test", Government.Capitalist);
+		mainPanel.add(cb);
+	}
+
+	private JPanel createMainPanel() {		
+		JPanel pnl = new JPanel(new GridLayout(0, numCountries / 5));
+		pnl.setSize(frameSize);
+		pnl.setPreferredSize(frameSize);
+		return pnl;
 	}
 
 	private int getNumberOfCountries() {
