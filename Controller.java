@@ -98,15 +98,15 @@ public class Controller {
 
 	private JPanel createMainPanel() {
 
-		int numRows = 4;
-		if (this.numCountries <= 5)
+		int numRows = 4; // start by assuming we have 4 rows of MAX_COLUMNS 
+		if (this.numCountries <= MAX_COLUMNS)
 			numRows = 1;
-		else if (this.numCountries <= 10)
+		else if (this.numCountries <= MAX_COLUMNS * 2)
 			numRows = 2;
-		else if (this.numCountries <= 15)
+		else if (this.numCountries <= MAX_COLUMNS * 3)
 			numRows = 3;
 
-		GridLayout layout = new GridLayout(numRows, MAX_COLUMNS, 10, 10);
+		GridLayout layout = new GridLayout(numRows, MAX_COLUMNS, 20, 20);
 		
 		JPanel pnl = new JPanel(layout);
 
