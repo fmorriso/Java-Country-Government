@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 
 public class Controller {
 
-	private JFrame frame;	
+	private JFrame frame;
 	private JPanel mainPanel;
 	private JPanel controlPanel;
 	private List<CountryButton> countries;
@@ -64,34 +66,38 @@ public class Controller {
 	private void populateCountryGridPanel() {
 		this.countries = new ArrayList<CountryButton>();
 		for (int i = 0; i < this.numCountries; i++) {
-			
+
 			boolean needUniqueName = true;
 			String name = null;
 			do {
 				name = CountryNameGenerator.getRandomCountryName();
-				if(isUniqueCountryName(name)) {
+				if (isUniqueCountryName(name)) {
 					needUniqueName = false;
 				}
-			}
-			while(needUniqueName);
-						
-			CountryButton cb = new CountryButton(name, Government.Capitalist, this);
+			} while (needUniqueName);
+
+			CountryButton cb = new CountryButton(name, Government.Unspecified, this);
 			this.countries.add(cb);
 			mainPanel.add(cb);
 		}
 	}
 
+	// make sure we haven't aleady used a country name
 	private boolean isUniqueCountryName(String name) {
-		if(this.countries.size() == 0) return true;
+
+		if (this.countries.size() == 0)
+			return true;
+
 		boolean isUnique = true;
-		for(CountryButton cb: this.countries) {
-			if(cb.getName().equals(name)) return false;
+		for (CountryButton cb : this.countries) {
+			if (cb.getName().equals(name))
+				return false;
 		}
 		return isUnique;
 	}
 
 	private JPanel createMainPanel() {
-		
+
 		int numRows = 4;
 		if (this.numCountries <= 5)
 			numRows = 1;
@@ -99,7 +105,7 @@ public class Controller {
 			numRows = 2;
 		else if (this.numCountries <= 15)
 			numRows = 3;
-		
+
 		GridLayout layout = new GridLayout(numRows, MAX_COLUMNS);
 		layout.setHgap(10);
 		layout.setVgap(10);
@@ -110,15 +116,40 @@ public class Controller {
 	}
 
 	private JPanel populateControlPanel() {
-		JPanel pnl = new JPanel(new GridLayout(1, 0));
+		
+		Dimension size = new Dimension(this.frame.getWidth() / 4, this.frame.getHeight() / 8);
+		
+		GridLayout layout = new GridLayout(1, 3, 20, 20);
+						
+		JPanel pnl = new JPanel(layout);
 
+		
+		//pnl.setSize(size);
+		//pnl.setPreferredSize(size);
+		
+
+		Dimension maxButtonSize = size; //new Dimension(40, 20);
+		
+		JPanel resetButtonPanel = new JPanel();
 		JButton resetButton = new JButton("Reset");
+		resetButton.setMinimumSize(maxButtonSize);
+		resetButton.setMaximumSize(maxButtonSize);		
 		resetButton.addActionListener(ae -> resetButtons(ae));
-		pnl.add(resetButton);
+		resetButtonPanel.add(resetButton);
+		pnl.add(resetButtonPanel);
+		
+		JPanel separatorPanel = new JPanel();
+		JSeparator separator = new JSeparator();
+		separatorPanel.add(separator);
+		pnl.add(separatorPanel);
 
+		JPanel exitButtonPanel = new JPanel();
 		JButton exitButton = new JButton("Exit");
+		exitButton.setMinimumSize(maxButtonSize);
+		exitButton.setMaximumSize(maxButtonSize);
 		exitButton.addActionListener(ae -> exitProgram(ae));
-		pnl.add(exitButton);
+		exitButtonPanel.add(exitButton);
+		pnl.add(exitButtonPanel);
 
 		return pnl;
 	}
@@ -129,11 +160,11 @@ public class Controller {
 	}
 
 	private void resetButtons(ActionEvent ae) {
-		System.out.format("Resetting %d buttons%n", this.countries.size());
-		for (CountryButton cb : this.countries) {			
+		// System.out.format("Resetting %d buttons%n", this.countries.size());
+		for (CountryButton cb : this.countries) {
 			cb.reset();
 		}
-		this.mainPanel.paintComponents(this.mainPanel.getGraphics());
+		//this.mainPanel.paintComponents(this.mainPanel.getGraphics());
 
 	}
 
@@ -175,14 +206,14 @@ public class Controller {
 	}
 
 	public void reactToCountryMouseClickEvent(CountryButton countryButton, MouseButton mouseButton) {
-		System.out.format("Button %s was clicked by the %s mouse button%n", countryButton.getName(), mouseButton);
+		// System.out.format("Button %s was clicked by the %s mouse button%n", countryButton.getName(), mouseButton);
 		switch (mouseButton) {
 			case Left :
-				showCountry(countryButton);
+				improveGovernment(countryButton);
 				break;
 
 			case Right :
-				changeGovernment(countryButton);
+				degradeGovernment(countryButton);
 				break;
 
 			default :
@@ -190,14 +221,39 @@ public class Controller {
 		}
 	}
 
-	private void changeGovernment(CountryButton countryButton) {
-		// TODO Auto-generated method stub
+	private void degradeGovernment(CountryButton countryButton) {
+
+		switch (countryButton.getGovernment()) {
+
+			case Unspecified :
+				countryButton.setGovernment(Government.Capitalist);
+				break;
+
+			case Capitalist :
+				countryButton.setGovernment(Government.Socialist);
+				break;
+
+			default :
+				break;
+		}
 
 	}
 
-	private void showCountry(CountryButton countryButton) {
-		// TODO Auto-generated method stub
+	private void improveGovernment(CountryButton countryButton) {
 
+		switch (countryButton.getGovernment()) {
+
+			case Unspecified :
+				countryButton.setGovernment(Government.Socialist);
+				break;
+
+			case Socialist :
+				countryButton.setGovernment(Government.Capitalist);
+				break;
+
+			default :
+				break;
+		}
 	}
 
 }

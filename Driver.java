@@ -9,7 +9,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 
-		DialogHelper.makeDialogsEasierToSee(32);
+		DialogHelper.makeDialogsEasierToSee(42);
 
 		// capture size of screen we're using
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

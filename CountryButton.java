@@ -11,16 +11,16 @@ public class CountryButton extends JButton {
     
     private Government government;
 	private String name;
+	
 	private static final Font normalFont = new Font(Font.MONOSPACED, Font.PLAIN, 36);
-	private static final Font boldFont = normalFont.deriveFont(Font.BOLD); 
-			
+	private static final Font boldFont = normalFont.deriveFont(Font.BOLD);			
 
     public CountryButton(String name, Government government, Controller controller) {
-        this.name = name;
-        this.government = government;
-        this.setFont(boldFont);
-        changeButtonText();
-        changeButtonColor();
+    	this.setFont(boldFont);
+    	
+    	this.name = name;
+    	setGovernment(government);
+        
         this.setBorder( BorderFactory.createBevelBorder(1) );
         this.addMouseListener(new CountryButtonListener(this, controller));
     }
@@ -72,6 +72,9 @@ public class CountryButton extends JButton {
 
 	public void setGovernment(Government government) {
 		this.government = government;
+	    changeButtonText();
+        changeButtonColor();
+		
 	}
 
 	public String getName() {
