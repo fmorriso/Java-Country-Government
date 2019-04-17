@@ -12,8 +12,7 @@ import javax.swing.JPanel;
 
 public class Controller {
 
-	private JFrame frame;
-	private Dimension frameSize;
+	private JFrame frame;	
 	private JPanel mainPanel;
 	private JPanel controlPanel;
 	private List<CountryButton> countries;
@@ -23,8 +22,6 @@ public class Controller {
 	private int numCountries;
 
 	public Controller(Dimension frameSize) {
-
-		this.frameSize = frameSize;
 
 		frame = new JFrame("Country Government Chooser");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,11 +64,30 @@ public class Controller {
 	private void populateCountryGridPanel() {
 		this.countries = new ArrayList<CountryButton>();
 		for (int i = 0; i < this.numCountries; i++) {
-			String name = String.format("Test%d", i);			
+			
+			boolean needUniqueName = true;
+			String name = null;
+			do {
+				name = CountryNameGenerator.getRandomCountryName();
+				if(isUniqueCountryName(name)) {
+					needUniqueName = false;
+				}
+			}
+			while(needUniqueName);
+						
 			CountryButton cb = new CountryButton(name, Government.Capitalist, this);
 			this.countries.add(cb);
 			mainPanel.add(cb);
 		}
+	}
+
+	private boolean isUniqueCountryName(String name) {
+		if(this.countries.size() == 0) return true;
+		boolean isUnique = true;
+		for(CountryButton cb: this.countries) {
+			if(cb.getName().equals(name)) return false;
+		}
+		return isUnique;
 	}
 
 	private JPanel createMainPanel() {

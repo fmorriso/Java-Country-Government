@@ -4,7 +4,7 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.border.Border;
+
 
 @SuppressWarnings("serial")
 public class CountryButton extends JButton {
@@ -57,7 +57,9 @@ public class CountryButton extends JButton {
 
 	private void changeButtonText() {
 		
-		this.setText(String.format("%s %s", this.getName(), this.government));
+		// center the text on two lines
+		String centeredTwoLines = String.format("<html><center>%s<br/>%s</center></html>", this.getName(), this.government);
+		this.setText(centeredTwoLines);
 		
 	}
 
