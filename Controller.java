@@ -5,6 +5,14 @@ public class Controller {
 
 	public void start() {
 		numCountries = getNumberOfCountries();
+		String title = "Country Government chooser";
+		String message;
+		if(numCountries == Integer.MIN_VALUE) {
+			message = "No country count chosen.  Game stopped.";
+			int messageType = JOptionPane.PLAIN_MESSAGE;
+			JOptionPane.showMessageDialog(null, message, title, messageType);
+			return;
+		}
 
 	}
 
@@ -21,15 +29,17 @@ public class Controller {
 		boolean keepAsking = true;
 		do {
 			try {
-				String rawResponse = JOptionPane.showInputDialog(null, prompt, dialogTitle, JOptionPane.QUESTION_MESSAGE);
+								
+				Object rawResponse = JOptionPane.showInputDialog(null, prompt, dialogTitle, JOptionPane.QUESTION_MESSAGE);
+							
 				// check for Cancel button click:
 				if(rawResponse == null) {
 					keepAsking = false;
-					//JOptionPane.CANCEL_OPTION;
+					count = Integer.MIN_VALUE; // call should check this value as the indicator that Cancel was clicked
 					continue;
 				}
 				
-				count = Integer.parseInt(rawResponse);
+				count = Integer.parseInt((String)rawResponse);
 				
 				if (count < min || count > max) {
 					JOptionPane.showMessageDialog(null, errorMessageOutsideRange, "Range Error",
