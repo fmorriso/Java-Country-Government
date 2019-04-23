@@ -66,14 +66,14 @@ public class Controller {
 		this.countries = new ArrayList<CountryButton>();
 		for (int i = 0; i < this.numCountries; i++) {
 
-			boolean needUniqueName = true;
+			boolean needUniqueCountryName = true;
 			String name = null;
 			do {
 				name = CountryNameGenerator.getRandomCountryName();
 				if (isUniqueCountryName(name)) {
-					needUniqueName = false;
+					needUniqueCountryName = false;
 				}
-			} while (needUniqueName);
+			} while (needUniqueCountryName);
 
 			CountryButton cb = new CountryButton(name, Government.Unspecified, this);
 			this.countries.add(cb);
@@ -208,6 +208,9 @@ public class Controller {
 		return count;
 	}
 
+	/*
+	Improve (left mouse click) or degrade the country's government.
+	*/
 	public void reactToCountryMouseClickEvent(CountryButton countryButton, MouseButton mouseButton) {
 		// System.out.format("Button %s was clicked by the %s mouse button%n", countryButton.getName(), mouseButton);
 		switch (mouseButton) {

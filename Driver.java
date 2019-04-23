@@ -20,7 +20,7 @@ public class Driver {
 		final int frameWidth = frameHeight;
 
 		Dimension frameSize = new Dimension(frameWidth, frameHeight);
-		System.out.format("frameSize=%s%n", frameSize);
+		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);
 
 		// fake out Java to avoid the dreaded "Toolkit not initialized" error:
 		new JFXPanel(); // this will prepare JavaFX toolkit and environment

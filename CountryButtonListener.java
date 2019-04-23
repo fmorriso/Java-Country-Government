@@ -34,7 +34,7 @@ public class CountryButtonListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// we don't care about this event
 
 	}
 
@@ -48,12 +48,13 @@ public class CountryButtonListener implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		int whichButton = e.getButton();
 		System.out.format("%s was pressed by the mouse %d (%s) button%n", countryButton.getName(), whichButton, getMouseButton(whichButton));
+		// relay which country button was clicked and which mouse button (left or right) was clicked.
 		controller.reactToCountryMouseClickEvent(this.countryButton, getMouseButton(whichButton));
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// we don't care about this event
 
 	}
 
