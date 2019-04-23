@@ -81,7 +81,7 @@ public class Controller {
 		}
 	}
 
-	// make sure we haven't aleady used a country name
+	// make sure we haven't already used a country name
 	private boolean isUniqueCountryName(String name) {
 
 		if (this.countries.size() == 0)
@@ -175,7 +175,7 @@ public class Controller {
 
 		int count = 0;
 		final int min = 5, max = 20;
-		String dialogTitle = String.format("Number of countries");
+		String dialogTitle = "Number of countries";
 		String prompt = String.format("Enter number of countries that is between %d and %d", min, max);
 		final String errorMessageOutsideRange = String.format("Invalid value - outside of allowable range of %d to %d. Try again.", min, max);
 		// keep asking for a number until the number is within the valid range.
