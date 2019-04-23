@@ -13,7 +13,7 @@ public class CountryButtonListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// NOTE: do NOT put code here because we prefer mousePressed even in order to
+		// NOTE: do NOT put code here because we prefer mousePressed event in order to
 		// 1. avoid duplicate reactions (pressed first, followed by clicked second)
 		// to left mouse click.
 		// 2. ignore Enter key (this program is designed to be used only with a mouse)
