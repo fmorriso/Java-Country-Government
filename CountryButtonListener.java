@@ -40,7 +40,7 @@ public class CountryButtonListener implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// we don't care about this event
 
 	}
 
