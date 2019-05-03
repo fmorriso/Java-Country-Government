@@ -11,8 +11,8 @@ public class CountryNameGenerator {
 	public static String getRandomCountryName() {
 
 		int i = (int) (Math.random() * availableCountries.size());
-		String name = availableCountries.get(i);
-		return name;
+		return availableCountries.get(i);
+		
 	}
 
 }
