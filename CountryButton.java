@@ -11,7 +11,7 @@ public class CountryButton extends JButton {
 	private Government government;
 	private String name;
 
-	private static final Font normalFont = new Font(Font.MONOSPACED, Font.PLAIN, 36);
+	private static final Font normalFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
 	private static final Font boldFont = normalFont.deriveFont(Font.BOLD);
 
 	public CountryButton(String name, Government government, Controller controller) {

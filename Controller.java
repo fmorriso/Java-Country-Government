@@ -69,7 +69,7 @@ public class Controller {
 
 	}
 
-	private void populateCountryGridPanel() {
+    private void populateCountryGridPanel() {
 		this.countries = new ArrayList<CountryButton>();
 		for (int i = 0; i < this.numCountries; i++) {
 
