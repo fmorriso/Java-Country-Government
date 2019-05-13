@@ -1,15 +1,14 @@
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
-import javafx.application.Platform;
 //Country Government chooser
-import javafx.embed.swing.JFXPanel;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 public class Driver {
 
 	public static void main(String[] args) {
 
-		DialogHelper.makeDialogsEasierToSee(42);
+		DialogHelper.makeDialogsEasierToSee(33);
 
 		// capture size of screen we're using
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -21,18 +20,14 @@ public class Driver {
 
 		Dimension frameSize = new Dimension(frameWidth, frameHeight);
 		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);
-
-		// fake out Java to avoid the dreaded "Toolkit not initialized" error:
-		new JFXPanel(); // this will prepare JavaFX toolkit and environment
-
-		Platform.runLater(() -> {
-			try {
-				Controller ctrl = new Controller(frameSize);
-				ctrl.start();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		
+		
+		EventQueue.invokeLater(() -> {
+		    Controller ctrl = new Controller(frameSize);
+			ctrl.start();
 		});
+
+
 	}
 
 }

@@ -173,12 +173,11 @@ public class Controller {
 	}
 
 	private void resetButtons() {
-		//System.out.format("button: width=%d, height=%d%n", button.getWidth(), button.getHeight());
-		// System.out.format("Resetting %d buttons%n", this.countries.size());
+
 		for (CountryButton cb : this.countries) {
 			cb.reset();
 		}
-		//this.mainPanel.paintComponents(this.mainPanel.getGraphics());
+		
 
 	}
 
