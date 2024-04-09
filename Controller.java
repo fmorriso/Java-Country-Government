@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller
+public class Controller implements Runnable
 {
 
     private static final int MAX_COLUMNS = 5;
@@ -18,7 +18,7 @@ public class Controller
 
     public Controller(Dimension frameSize)
     {
-
+        System.out.println("DEBUG: running Controller constructor");
         String frameTitle = String.format("Country Government using java version %s", getJavaVersion());
         frame = new JFrame(frameTitle);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,6 +26,17 @@ public class Controller
         frame.setPreferredSize(frameSize);
         frame.setSize(frameSize);
 
+        this.run();
+    }
+
+    /**
+     * Runs this operation.
+     */
+    @Override
+    public void run()
+    {
+        System.out.println("DEBUG: made it to Controller.run()");
+        start();
     }
 
     private static String getJavaVersion()
@@ -34,8 +45,9 @@ public class Controller
         return String.format("%s.%s.%s.%s", runTimeVersion.feature(), runTimeVersion.interim(), runTimeVersion.update(), runTimeVersion.patch());
     }
 
-    public void start()
+    private void start()
     {
+        System.out.println("DEBUG: Running Controller.start()");
         numCountries = getNumberOfCountries();
         String title = "Country Government chooser";
         String message;
@@ -277,5 +289,6 @@ public class Controller
                 break;
         }
     }
+
 
 }

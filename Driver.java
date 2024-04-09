@@ -19,11 +19,11 @@ public class Driver {
 		final int frameWidth = frameHeight;
 
 		Dimension frameSize = new Dimension(frameWidth, frameHeight);
-		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);		
-		
-		EventQueue.invokeLater(() -> {
-		    Controller ctrl = new Controller(frameSize);
-			ctrl.start();
+		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);
+
+		javax.swing.SwingUtilities.invokeLater(() -> {
+		    new Controller(frameSize);
+//			ctrl.start();
 		});
 
 
