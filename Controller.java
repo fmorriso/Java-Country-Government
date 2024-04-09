@@ -160,7 +160,7 @@ public class Controller {
 		JButton exitButton = new JButton("Exit");
 		exitButton.setMinimumSize(minButtonSize);
 		exitButton.setMaximumSize(maxButtonSize);
-		exitButton.addActionListener(ae -> exitProgram(ae));
+		exitButton.addActionListener(this::exitProgram);
 		exitButtonWrapper.add(exitButton);
 		controlPanel.add(exitButtonWrapper);		
 
