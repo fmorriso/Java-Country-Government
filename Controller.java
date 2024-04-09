@@ -31,7 +31,8 @@ public class Controller {
 
 	public Controller(Dimension frameSize) {
 
-		frame = new JFrame("Country Government Chooser");
+		String frameTitle = String.format("Country Government using java version %s", getJavaVersion());
+		frame = new JFrame(frameTitle);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.setPreferredSize(frameSize);
@@ -270,6 +271,12 @@ public class Controller {
 			default :
 				break;
 		}
+	}
+
+	private static String getJavaVersion()
+	{
+		Runtime.Version runTimeVersion = Runtime.version();
+		return String.format("%s.%s.%s.%s", runTimeVersion.feature(), runTimeVersion.interim(), runTimeVersion.update(), runTimeVersion.patch());
 	}
 
 }

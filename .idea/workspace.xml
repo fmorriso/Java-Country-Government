@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9094671-b132-44ca-88c1-af1c4ab7140f" name="Default Changelist" comment="replace lambda for exiting program with direct method call">
-      <change beforePath="$PROJECT_DIR$/CountryButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/CountryButton.java" afterDir="false" />
+    <list default="true" id="b9094671-b132-44ca-88c1-af1c4ab7140f" name="Default Changelist" comment="reformat code">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +79,10 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -153,7 +158,7 @@
       <option name="presentableId" value="Default" />
       <updated>1555549364571</updated>
       <workItem from="1555549366750" duration="87000" />
-      <workItem from="1712699269435" duration="1195000" />
+      <workItem from="1712699269435" duration="1546000" />
     </task>
     <task id="LOCAL-00001" summary="emit max button size once calculated">
       <option name="closed" value="true" />
@@ -171,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712700369558</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="reformat code">
+      <option name="closed" value="true" />
+      <created>1712700478090</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712700478090</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -215,7 +228,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="emit max button size once calculated" />
     <MESSAGE value="replace lambda for exiting program with direct method call" />
-    <option name="LAST_COMMIT_MESSAGE" value="replace lambda for exiting program with direct method call" />
+    <MESSAGE value="reformat code" />
+    <option name="LAST_COMMIT_MESSAGE" value="reformat code" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Driver.java">
