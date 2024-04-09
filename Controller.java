@@ -124,9 +124,9 @@ public class Controller {
 	private JPanel createControlPanel() {
 		System.out.format("Frame: width=%d, height=%d%n",this.frame.getWidth(),this.frame.getHeight());
 		Dimension size = new Dimension(this.frame.getWidth() / 8, this.frame.getHeight() / 16);
-		Dimension maxButtonSize = size; //new Dimension(40, 20);
+		Dimension maxButtonSize = size;
 		Dimension minButtonSize = size;
-		System.out.println(maxButtonSize);		
+		System.out.format("maxButtonSize = (%d x %d)%n", maxButtonSize.width, maxButtonSize.height);
 		
 		// allow for one row, with three components (button, separator, button)
 		GridLayout layout = new GridLayout(1, 3, 20, 20);
