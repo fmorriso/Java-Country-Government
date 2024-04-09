@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9094671-b132-44ca-88c1-af1c4ab7140f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.java" afterDir="false" />
+    <list default="true" id="b9094671-b132-44ca-88c1-af1c4ab7140f" name="Default Changelist" comment="replace lambda for exiting program with direct method call">
+      <change beforePath="$PROJECT_DIR$/CountryButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/CountryButton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,8 +153,25 @@
       <option name="presentableId" value="Default" />
       <updated>1555549364571</updated>
       <workItem from="1555549366750" duration="87000" />
-      <workItem from="1712699269435" duration="879000" />
+      <workItem from="1712699269435" duration="1195000" />
     </task>
+    <task id="LOCAL-00001" summary="emit max button size once calculated">
+      <option name="closed" value="true" />
+      <created>1712700237343</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712700237343</updated>
+    </task>
+    <task id="LOCAL-00002" summary="replace lambda for exiting program with direct method call">
+      <option name="closed" value="true" />
+      <created>1712700369558</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712700369558</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -193,6 +209,13 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="emit max button size once calculated" />
+    <MESSAGE value="replace lambda for exiting program with direct method call" />
+    <option name="LAST_COMMIT_MESSAGE" value="replace lambda for exiting program with direct method call" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Driver.java">

@@ -1,88 +1,94 @@
-
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
-public class CountryButton extends JButton {
+public class CountryButton extends JButton
+{
 
-	private Government government;
-	private String name;
+    private static final Font normalFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
+    private static final Font boldFont = normalFont.deriveFont(Font.BOLD);
+    private Government government;
+    private String name;
 
-	private static final Font normalFont = new Font(Font.MONOSPACED, Font.PLAIN, 24);
-	private static final Font boldFont = normalFont.deriveFont(Font.BOLD);
+    public CountryButton(String name, Government government, Controller controller)
+    {
+        this.setFont(boldFont);
 
-	public CountryButton(String name, Government government, Controller controller) {
-		this.setFont(boldFont);
+        this.name = name;
+        setGovernment(government);
 
-		this.name = name;
-		setGovernment(government);
+        this.setBorder(BorderFactory.createBevelBorder(1));
+        this.addMouseListener(new CountryButtonListener(this, controller));
+    }
 
-		this.setBorder(BorderFactory.createBevelBorder(1));
-		this.addMouseListener(new CountryButtonListener(this, controller));
-	}
+    @SuppressWarnings("unused")
+    private CountryButton()
+    {
+        /* prevent uninitialized instances */
+    }
 
-	public void reset() {
-		this.government = Government.Unspecified;
-		changeButtonText();
-		changeButtonColor();
-	}
+    public void reset()
+    {
+        this.government = Government.Unspecified;
+        changeButtonText();
+        changeButtonColor();
+    }
 
-	private void changeButtonColor() {
+    private void changeButtonColor()
+    {
 
-		switch (government) {
-		case Capitalist:
-			this.setBackground(Color.BLUE.darker());
-			this.setForeground(Color.WHITE);
-			break;
+        switch (government) {
+            case Capitalist:
+                this.setBackground(Color.BLUE.darker());
+                this.setForeground(Color.WHITE);
+                break;
 
-		case Socialist:
-			this.setBackground(Color.RED.darker());
-			this.setForeground(Color.WHITE);
-			break;
+            case Socialist:
+                this.setBackground(Color.RED.darker());
+                this.setForeground(Color.WHITE);
+                break;
 
-		case Unspecified:
-			this.setBackground(Color.GREEN.darker());
-			this.setForeground(Color.WHITE);
-			break;
+            case Unspecified:
+                this.setBackground(Color.GREEN.darker());
+                this.setForeground(Color.WHITE);
+                break;
 
-		default:
-			break;
-		}
+            default:
+                break;
+        }
 
-	}
+    }
 
-	private void changeButtonText() {
+    private void changeButtonText()
+    {
 
-		// center the text on two lines
-		String centeredTwoLines = String.format("<html><center>%s<br/>%s</center></html>", this.getName(),
-				this.government);
-		this.setText(centeredTwoLines);
+        // center the text on two lines
+        String centeredTwoLines = String.format("<html><center>%s<br/>%s</center></html>", this.getName(),
+                this.government);
+        this.setText(centeredTwoLines);
 
-	}
+    }
 
-	@SuppressWarnings("unused")
-	private CountryButton() {
-		/* prevent uninitialized instances */}
+    public Government getGovernment()
+    {
+        return government;
+    }
 
-	public Government getGovernment() {
-		return government;
-	}
+    public void setGovernment(Government government)
+    {
+        this.government = government;
+        changeButtonText();
+        changeButtonColor();
 
-	public void setGovernment(Government government) {
-		this.government = government;
-		changeButtonText();
-		changeButtonColor();
+    }
 
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 }
