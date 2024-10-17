@@ -261,7 +261,6 @@ public class Controller implements Runnable
      */
     private void degradeGovernment(CountryButton countryButton)
     {
-
         switch (countryButton.getGovernment()) {
 
             case Unspecified:
