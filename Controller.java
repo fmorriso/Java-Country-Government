@@ -234,7 +234,7 @@ public class Controller implements Runnable
     }
 
     /*
-    Improve (left mouse click) or degrade the country's government.
+    Improve (left mouse click) or degrade (right mouse click) the country's government.
     */
     public void reactToCountryMouseClickEvent(CountryButton countryButton, MouseButton mouseButton)
     {
@@ -253,6 +253,12 @@ public class Controller implements Runnable
         }
     }
 
+    /** Degrade the specified country's form of government.
+     * @apiNote - if the country's current form of government is Capitalist, change it to Socialist.
+     *            if the country's current form of government is Unspecified, change it to Capitalist.
+     *            For any other type of government, do not change it.
+     * @param countryButton - the button for the country being degraded.
+     */
     private void degradeGovernment(CountryButton countryButton)
     {
 

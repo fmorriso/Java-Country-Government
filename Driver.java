@@ -10,23 +10,23 @@ public class Driver {
 
 		DialogHelper.makeDialogsEasierToSee(33);
 
-		// capture size of screen we're using
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-		// Define the size of the JFrame as a square that is a percentage of the
-		// available screen area and a multiple of 100.
-		final int frameHeight = (int) (screenSize.height * 85.00 / 100) / 100 * 100;
-		final int frameWidth = frameHeight;
-
-		Dimension frameSize = new Dimension(frameWidth, frameHeight);
+		Dimension frameSize = SwingScreenUtilities.getScaledSize(.55, 100, true);
+		int frameWidth = frameSize.width;
+		int frameHeight = frameSize.height;
 		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);
 
 		javax.swing.SwingUtilities.invokeLater(() -> {
 		    new Controller(frameSize);
-//			ctrl.start();
 		});
+	}
 
-
+	/** get the java version that is running the current program
+	 * @return string containing the java version running the current program
+	 */
+	private static String getJavaVersion()
+	{
+		Runtime.Version rtv = Runtime.version();
+		return String.format("%s.%s.%s.%s", rtv.feature(), rtv.interim(), rtv.update(), rtv.patch());
 	}
 
 }
