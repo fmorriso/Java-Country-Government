@@ -8,9 +8,9 @@ public class Driver {
 
 	public static void main(String[] args) {
 
-		DialogHelper.makeDialogsEasierToSee(33);
+		DialogHelper.makeDialogsEasierToSee(22);
 
-		Dimension frameSize = SwingScreenUtilities.getScaledSize(.55, 100, true);
+		Dimension frameSize = SwingScreenUtilities.getScaledSize(.45, 100, true);
 		int frameWidth = frameSize.width;
 		int frameHeight = frameSize.height;
 		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);
