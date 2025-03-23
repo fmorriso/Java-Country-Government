@@ -1,7 +1,11 @@
 # Country Government Chooser
+
 A simple Country Government chooser, written in JAVA, to demonstrate choosing a government type for a grid of countries.
+
 ## Overview
+
 The code includes examples of:
+
 * JOptionPane - for dialogs
 * Grid Layout - for UI design
 * JFrame and JPanel - for basic UI components
@@ -13,8 +17,7 @@ The code includes examples of:
 |:---------|---------:|
 | Java     | 24.0.0.0 |
 | IntelliJ | 2024.3.5 |
-| VSCode | 1.98.0 |
-
+| VSCode   |   1.98.0 |
 
 ## Change History
 
@@ -23,4 +26,5 @@ The code includes examples of:
 | 2025-03-22 | Converted from GitLab to GitHub |
 
 ## References
+
 * [How to Make Dialogs with JOptionPane](https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html)
