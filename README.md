@@ -13,17 +13,18 @@ The code includes examples of:
 * enumeration - available government types, which mouse button was clicked
 * ## Tools Used
 
-| Tool     |  Version |
-|:---------|---------:|
-| Java     | 24.0.0.0 |
-| IntelliJ | 2024.3.5 |
-| VSCode   |   1.98.0 |
+| Tool     |    Version |
+|:---------|-----------:|
+| Java     |   24.0.1.0 |
+| IntelliJ | 2025.1.1.1 |
+| VSCode   |    1.100.2 |
 
 ## Change History
 
 | Date       | Description                     |
 |:-----------|:--------------------------------|
 | 2025-03-22 | Converted from GitLab to GitHub |
+| 2025-05-15 | Optimize imports                |
 
 ## References
 
