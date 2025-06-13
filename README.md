@@ -11,13 +11,14 @@ The code includes examples of:
 * JFrame and JPanel - for basic UI components
 * JButton - specialized to handle choice of government
 * enumeration - available government types, which mouse button was clicked
-* ## Tools Used
 
-| Tool     |    Version |
-|:---------|-----------:|
-| Java     |   24.0.1.0 |
-| IntelliJ | 2025.1.1.1 |
-| VSCode   |    1.100.2 |
+## Tools Used
+
+| Tool     |  Version |
+|:---------|---------:|
+| Java     | 24.0.1.0 |
+| IntelliJ | 2025.1.2 |
+| VSCode   |  1.101.0 |
 
 ## Change History
 
@@ -25,6 +26,7 @@ The code includes examples of:
 |:-----------|:--------------------------------|
 | 2025-03-22 | Converted from GitLab to GitHub |
 | 2025-05-15 | Optimize imports                |
+| 2025-06-13 | minor code clean up             |
 
 ## References
 

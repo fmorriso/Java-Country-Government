@@ -1,12 +1,12 @@
 
 //Country Government chooser
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Toolkit;
 
 public class Driver {
 
 	public static void main(String[] args) {
+		String javaVersion = getJavaVersion();
+		System.out.format("Using Java version %s%n", javaVersion);
 
 		DialogHelper.makeDialogsEasierToSee(22);
 
@@ -16,7 +16,7 @@ public class Driver {
 		System.out.format("frame width=%d, height=%d%n", frameWidth, frameHeight);
 
 		javax.swing.SwingUtilities.invokeLater(() -> {
-		    new Controller(frameSize);
+		    new Controller(frameSize, javaVersion);
 		});
 	}
 

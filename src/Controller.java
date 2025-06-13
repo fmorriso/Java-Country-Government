@@ -5,21 +5,18 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller implements Runnable
-{
+public class Controller implements Runnable {
 
     private static final int MAX_COLUMNS = 5;
-    private JFrame frame;
+    private final JFrame frame;
     private JPanel mainPanel;
-    private JPanel controlPanel;
     private List<CountryButton> countries;
-    private EmptyBorder emptyBorder = new EmptyBorder(10, 10, 10, 10);
+    private final EmptyBorder emptyBorder = new EmptyBorder(10, 10, 10, 10);
     private int numCountries;
 
-    public Controller(Dimension frameSize)
-    {
+    public Controller(Dimension frameSize, String javaVersion) {
         System.out.println("DEBUG: running Controller constructor");
-        String frameTitle = String.format("Country Government using java version %s", getJavaVersion());
+        String frameTitle = String.format("Country Government using java version %s", javaVersion);
         frame = new JFrame(frameTitle);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,20 +30,12 @@ public class Controller implements Runnable
      * Runs this operation.
      */
     @Override
-    public void run()
-    {
+    public void run() {
         System.out.println("DEBUG: made it to Controller.run()");
         start();
     }
 
-    private static String getJavaVersion()
-    {
-        Runtime.Version runTimeVersion = Runtime.version();
-        return String.format("%s.%s.%s.%s", runTimeVersion.feature(), runTimeVersion.interim(), runTimeVersion.update(), runTimeVersion.patch());
-    }
-
-    private void start()
-    {
+    private void start() {
         System.out.println("DEBUG: Running Controller.start()");
         numCountries = getNumberOfCountries();
         String title = "Country Government chooser";
@@ -66,7 +55,7 @@ public class Controller implements Runnable
 
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
-        controlPanel = createControlPanel();
+        JPanel controlPanel = createControlPanel();
         frame.getContentPane().add(controlPanel, BorderLayout.CENTER);
 
         frame.pack();
@@ -77,13 +66,12 @@ public class Controller implements Runnable
 
     }
 
-    private void populateCountryGridPanel()
-    {
+    private void populateCountryGridPanel() {
         this.countries = new ArrayList<CountryButton>();
         for (int i = 0; i < this.numCountries; i++) {
 
             boolean needUniqueCountryName = true;
-            String name = null;
+            String name;
             do {
                 name = CountryNameGenerator.getRandomCountryName();
                 if (isUniqueCountryName(name)) {
@@ -99,11 +87,9 @@ public class Controller implements Runnable
     }
 
     // make sure we haven't already used a country name
-    private boolean isUniqueCountryName(String name)
-    {
+    private boolean isUniqueCountryName(String name) {
 
-        if (this.countries.size() == 0)
-            return true;
+        if (this.countries.isEmpty()) return true;
 
         boolean isUnique = true;
         for (CountryButton cb : this.countries) {
@@ -113,8 +99,7 @@ public class Controller implements Runnable
         return isUnique;
     }
 
-    private JPanel createMainPanel()
-    {
+    private JPanel createMainPanel() {
 
         int numRows = 4; // start by assuming we have 4 rows of MAX_COLUMNS
         if (this.numCountries <= MAX_COLUMNS)
@@ -132,13 +117,10 @@ public class Controller implements Runnable
         return pnl;
     }
 
-    private JPanel createControlPanel()
-    {
+    private JPanel createControlPanel() {
         System.out.format("Frame: width=%d, height=%d%n", this.frame.getWidth(), this.frame.getHeight());
         Dimension size = new Dimension(this.frame.getWidth() / 8, this.frame.getHeight() / 16);
-        Dimension maxButtonSize = size;
-        Dimension minButtonSize = size;
-        System.out.format("maxButtonSize = (%d x %d)%n", maxButtonSize.width, maxButtonSize.height);
+        System.out.format("maxButtonSize = (%d x %d)%n", size.width, size.height);
 
         // allow for one row, with three components (button, separator, button)
         GridLayout layout = new GridLayout(1, 3, 20, 20);
@@ -150,28 +132,28 @@ public class Controller implements Runnable
 
         // trick JAVA GridLayout into NOT auto-resizing our buttons by wrapping them with a JPanel
         JPanel resetButtonWrapper = new JPanel();
-        resetButtonWrapper.setSize(maxButtonSize);
+        resetButtonWrapper.setSize(size);
         //resetButtonWrapper.setPreferredSize(maxButtonSize);
         JButton resetButton = new JButton("Reset");
-        resetButton.setMinimumSize(minButtonSize);
-        resetButton.setMaximumSize(maxButtonSize);
+        resetButton.setMinimumSize(size);
+        resetButton.setMaximumSize(size);
         resetButton.addActionListener(ae -> resetButtons());
         resetButtonWrapper.add(resetButton);
 
         controlPanel.add(resetButtonWrapper);
 
         JPanel separatorWrapper = new JPanel();
-        separatorWrapper.setSize(maxButtonSize);
+        separatorWrapper.setSize(size);
         //separatorWrapper.setPreferredSize(maxButtonSize);
         JSeparator separator = new JSeparator();
         separatorWrapper.add(separator);
         controlPanel.add(separatorWrapper);
 
         JPanel exitButtonWrapper = new JPanel();
-        exitButtonWrapper.setSize(maxButtonSize);
+        exitButtonWrapper.setSize(size);
         JButton exitButton = new JButton("Exit");
-        exitButton.setMinimumSize(minButtonSize);
-        exitButton.setMaximumSize(maxButtonSize);
+        exitButton.setMinimumSize(size);
+        exitButton.setMaximumSize(size);
         exitButton.addActionListener(this::exitProgram);
         exitButtonWrapper.add(exitButton);
         controlPanel.add(exitButtonWrapper);
@@ -179,14 +161,12 @@ public class Controller implements Runnable
         return controlPanel;
     }
 
-    private void exitProgram(ActionEvent ae)
-    {
+    private void exitProgram(ActionEvent ae) {
         JOptionPane.showMessageDialog(null, "stopping program");
         System.exit(0);
     }
 
-    private void resetButtons()
-    {
+    private void resetButtons() {
 
         for (CountryButton cb : this.countries) {
             cb.reset();
@@ -195,8 +175,7 @@ public class Controller implements Runnable
 
     }
 
-    private int getNumberOfCountries()
-    {
+    private int getNumberOfCountries() {
 
         int count = 0;
         final int min = 5, max = 20;
@@ -209,7 +188,7 @@ public class Controller implements Runnable
         do {
             try {
 
-                Object rawResponse = JOptionPane.showInputDialog(null, prompt, dialogTitle, JOptionPane.QUESTION_MESSAGE);
+                String rawResponse = JOptionPane.showInputDialog(null, prompt, dialogTitle, JOptionPane.QUESTION_MESSAGE);
 
                 // check for Cancel button click:
                 if (rawResponse == null) {
@@ -218,7 +197,7 @@ public class Controller implements Runnable
                     continue;
                 }
 
-                count = Integer.parseInt((String) rawResponse);
+                count = Integer.parseInt(rawResponse);
 
                 if (count < min || count > max) {
                     JOptionPane.showMessageDialog(null, errorMessageOutsideRange, "Range Error", JOptionPane.ERROR_MESSAGE);
@@ -236,8 +215,7 @@ public class Controller implements Runnable
     /*
     Improve (left mouse click) or degrade (right mouse click) the country's government.
     */
-    public void reactToCountryMouseClickEvent(CountryButton countryButton, MouseButton mouseButton)
-    {
+    public void reactToCountryMouseClickEvent(CountryButton countryButton, MouseButton mouseButton) {
         // System.out.format("Button %s was clicked by the %s mouse button%n", countryButton.getName(), mouseButton);
         switch (mouseButton) {
             case Left:
@@ -253,14 +231,15 @@ public class Controller implements Runnable
         }
     }
 
-    /** Degrade the specified country's form of government.
-     * @apiNote - if the country's current form of government is Capitalist, change it to Socialist.
-     *            if the country's current form of government is Unspecified, change it to Capitalist.
-     *            For any other type of government, do not change it.
+    /**
+     * Degrade the specified country's form of government.
+     *
      * @param countryButton - the button for the country being degraded.
+     * @apiNote - if the country's current form of government is Capitalist, change it to Socialist.
+     * if the country's current form of government is Unspecified, change it to Capitalist.
+     * For any other type of government, do not change it.
      */
-    private void degradeGovernment(CountryButton countryButton)
-    {
+    private void degradeGovernment(CountryButton countryButton) {
         switch (countryButton.getGovernment()) {
 
             case Unspecified:
@@ -277,8 +256,7 @@ public class Controller implements Runnable
 
     }
 
-    private void improveGovernment(CountryButton countryButton)
-    {
+    private void improveGovernment(CountryButton countryButton) {
 
         switch (countryButton.getGovernment()) {
 
